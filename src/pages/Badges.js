@@ -9,6 +9,11 @@ import BadgesList from '../components/BadgesList'
 
 class Badges extends Component {
 
+    // state ={
+    //     loading: true,
+    //     error: null,
+    //     data: undefined
+    // }
     // state = {
     //     data: [
     //         {
@@ -42,7 +47,7 @@ class Badges extends Component {
     // }
     constructor(props){
         super(props)
-        console.log('.1')
+        console.log('1. Constructor()')
         this.state = {
             data: [
                 
@@ -50,7 +55,7 @@ class Badges extends Component {
         }
     }
     componentDidMount(){
-        console.log('33')
+        console.log('3. ComponentDidMount()')
         this.timeoutid = setTimeout(()=>{
             this.setState({
                 data: [
@@ -85,9 +90,9 @@ class Badges extends Component {
             })
         },3000)
     }
-
     componentDidUpdate(prevProps, prevState){
-        console.log('5')
+        console.log('5. componentDidUpdate()')
+        console.group('5-')
         console.log({
             prevProps: prevProps,
             prevState: prevState
@@ -96,14 +101,17 @@ class Badges extends Component {
             props: this.props,
             state: this.state
         })
+        console.groupEnd()
     }
     componentWillUnmount(){
-        console.log('6 unmounts')
+        console.log('6. componentWillUnmount()')
         clearTimeout(this.timeoutid)
-
     }
     render() {
-        console.log('2')
+        if (this.state.loading === true){
+            return 'loading ...'
+        }
+        console.log('2/4. Render()')
         return (
             <React.Fragment>
                 {/* < NavBar />   */}
