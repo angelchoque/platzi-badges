@@ -25,8 +25,11 @@ const api = {
   badges: {
     list() {
       return callApi('/badges');
+      // return []
+      // throw new Error('Not found')
     },
     create(badge) {
+      // throw new Error('505 error sv')
       return callApi(`/badges`, {
         method: 'POST',
         body: JSON.stringify(badge),

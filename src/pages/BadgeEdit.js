@@ -11,9 +11,9 @@ import Loader from '../components/Loader'
 import api from '../api'
 
 
-class BadgeNew extends Component {
+class BadgeEdit extends Component {
     state = {
-        loading: false,
+        loading: true,
         error: null,
         form: {
             firstName: '',
@@ -23,7 +23,20 @@ class BadgeNew extends Component {
             twitter: ''
         }
     }
-
+    componentDidMount(){
+        this.fetchData()
+    }
+    fetchData = async ()=>{
+        this.setState({loading:true, error:null})
+        try{
+            const data = await api.badges.read(
+                this.props.match.params.badgeId
+            )
+            this.setState({loading:false,form:data})
+        }catch(error){
+            this.setState({loading:false,error})
+        }
+    }
     handleChange = (event) =>{
         // const nextForm = this.state.form
         // nextForm[event.target.name] = event.target.value
@@ -43,7 +56,7 @@ class BadgeNew extends Component {
         this.setState({loading:true,error:null})
 
         try {
-            await api.badges.create(this.state.form)
+            await api.badges.update( this.props.match.params.badgeId,this.state.form)
             this.setState({loading:false})
 
             this.props.history.push('/badges')
@@ -75,8 +88,7 @@ class BadgeNew extends Component {
                                 />
                         </div>
                         <div className="col">
-                <h1>New Attendant</h1>
-
+                <h1>Badge edit</h1>
                             < BadgeForm 
                                 onSubmit={this.handleSubmit}
                                 onChange={this.handleChange} 
@@ -91,4 +103,4 @@ class BadgeNew extends Component {
     }
 }
 
-export default BadgeNew
+export default BadgeEdit

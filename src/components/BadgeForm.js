@@ -23,16 +23,15 @@ class BadgeForm extends Component{
     handleClick = (event) => {
         console.log('btn was lcik')
     }
-    handleSubmit = (event) => {
-        event.preventDefault() // detiene el submit
-        console.log('hya ')
-        console.log(this.state)
-    }
+    // handleSubmit = (event) => {
+    //     event.preventDefault() // detiene el submit
+    //     console.log('hya ')
+    //     console.log(this.state)
+    // }
     render(){
         return (
             <div className="">
-                <h1>New Attendant</h1>
-                <form action="" onSubmit={this.handleSubmit}>
+                <form action="" onSubmit={this.props.onSubmit}>
                     <div className="form-group">
                         <label htmlFor="">First Name</label>
                         {/* leer -> statate //// escribr set */}
@@ -42,25 +41,29 @@ class BadgeForm extends Component{
                             type="text" 
                             name="firstName" 
                             placeholder="Name" 
-                            value={this.props.formValues.firstName} />
+                            value={this.props.formValues.firstName}
+                            required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Last Name</label>
-                        <input onChange={this.props.onChange} className="form-control" type="text" name="lastName" placeholder="lastName" value={this.props.formValues.lastName} />
+                        <input required onChange={this.props.onChange} className="form-control" type="text" name="lastName" placeholder="lastName" value={this.props.formValues.lastName} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Email</label>
-                        <input onChange={this.props.onChange} className="form-control" type="email" name="email" placeholder="email@example.com" value={this.props.formValues.email} />
+                        <input required onChange={this.props.onChange} className="form-control" type="email" name="email" placeholder="email@example.com" value={this.props.formValues.email} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Job Title</label>
-                        <input onChange={this.props.onChange} className="form-control" type="text" name="jobTitle" value={this.props.formValues.jobTitle}  />
+                        <input required onChange={this.props.onChange} className="form-control" type="text" name="jobTitle" value={this.props.formValues.jobTitle}  />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Twitter</label>
-                        <input onChange={this.props.onChange} className="form-control" type="text" name="twitter" placeholder="@user" value={this.props.formValues.twitter} />
+                        <input required onChange={this.props.onChange} className="form-control" type="text" name="twitter" placeholder="@user" value={this.props.formValues.twitter} />
                     </div>
                     <button onClick={this.handleClick} className="btn btn-primary mt-2">save</button>
+                    {this.props.error && (
+                        <p className="text-danger">{this.props.error.message}</p>
+                    )}
                 </form>
             </div>
         )
