@@ -1,0 +1,2 @@
+# platzi-badges
+## react project
